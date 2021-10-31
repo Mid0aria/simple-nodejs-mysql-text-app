@@ -1,7 +1,9 @@
 ## Requirements
 
+```
 Node.js >= v16
 Mysql
+```
 
 ## Installation
 
@@ -11,9 +13,11 @@ $ npm i
 
 ## Modules
 
+```
 body-parser
 chalk
 ejs
 express
 mysql
 randomid
+```
