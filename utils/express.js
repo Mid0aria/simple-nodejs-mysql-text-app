@@ -25,11 +25,27 @@ module.exports = (
     app.post("/new", (req, res) => {
         if (req.body.baslik == "Başlık") return res.redirect("/");
         if (req.body.text == "Birşeyler yaz ...") return res.redirect("/");
-        var id = randomid(6);
-        /*var özelid = req.body.ozellink;
-        if (özelid) {
-            var id = özelid;
-        }*/
+        var id = "nt-" + randomid(10);
+        db.query(
+            `SELECT * FROM ${dbtablename} WHERE id = '${id}'  `,
+            function (err, result) {
+                if (err) throw err;
+                var string = JSON.stringify(result);
+                const result2 = JSON.parse(string);
+                if (result2[0] == undefined) {
+                    var isvalid = "yes";
+                } else {
+                    var isvalid = "no";
+                    var id = "nt-s" + randomid(10);
+                }
+            }
+        );
+        db.query(
+            `INSERT INTO ${dbtablename} (id, baslik, text) VALUES ('${id}', '${req.body.baslik}', '${req.body.text}')`,
+            function (err, result) {
+                if (err) throw err;
+            }
+        );
         console.log(
             chalk.green("New Comment ") +
                 ": " +
@@ -37,12 +53,6 @@ module.exports = (
                 " | " +
                 chalk.yellow("IP: ") +
                 req.connection.remoteAddress
-        );
-        db.query(
-            `INSERT INTO ${dbtablename} (id, baslik, text) VALUES ('${id}', '${req.body.baslik}', '${req.body.text}')`,
-            function (err, result) {
-                if (err) throw err;
-            }
         );
         res.redirect(303, `/paste/${id}`);
     });
