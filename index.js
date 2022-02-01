@@ -18,9 +18,8 @@ db.connect(function (err) {
     console.log("DB Connected!");
 });
 
-var appname = "Note Chan";
-var dbtablename = "notechan";
-
+const appname = "Note Chan";
+const dbtablename = "notechan";
 require("./utils/express")(
     express,
     app,
