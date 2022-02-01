@@ -23,6 +23,8 @@ module.exports = (
     });
 
     app.post("/new", (req, res) => {
+        if (req.body.baslik == "Başlık") return res.redirect("/");
+        if (req.body.text == "Birşeyler yaz ...") return res.redirect("/");
         var id = randomid(6);
         /*var özelid = req.body.ozellink;
         if (özelid) {
@@ -48,20 +50,16 @@ module.exports = (
     app.get("/paste/:id", (req, res) => {
         var id = req.params.id;
         db.query(
-            `SELECT * FROM ${dbtablename} WHERE id IS NOT NULL OR id = '${id}'  `,
+            `SELECT * FROM ${dbtablename} WHERE id = '${id}'  `,
             function (err, result) {
                 if (err) throw err;
                 var string = JSON.stringify(result);
-                var result2 = JSON.parse(string);
-
-                if (result2[0] == undefined) return (result2 = null);
-
-                if (result2[0] == "{ id: '404'") {
-                    res.redirect(308, "/404");
+                const result2 = JSON.parse(string);
+                if (result2[0] == undefined) {
+                    return res.redirect(308, "/404");
                 } else {
                     var baslik = result2[0].baslik;
                     var text = result2[0].text;
-
                     res.render("../Frontend/paste.ejs", {
                         baslik: baslik,
                         text: text,
@@ -73,25 +71,18 @@ module.exports = (
     });
 
     app.get("/raw/:id", (req, res) => {
-        var id = req.params.id;
+        const id = req.params.id;
         db.query(
-            `SELECT * FROM ${dbtablename} WHERE id IS NOT NULL OR id = '${id}'  `,
+            `SELECT * FROM ${dbtablename} WHERE id = '${id}'  `,
             function (err, result) {
                 if (err) throw err;
                 var string = JSON.stringify(result);
-                var result2 = JSON.parse(string);
-
-                if (result2[0] == undefined) return (result2 = null);
-
-                if (result2[0] == "{ id: '404'") {
-                    //res.redirect(308, "/404");
-                    res.send("Text bulunamadı ama nedenini söylemem :)");
+                const result2 = JSON.parse(string);
+                if (result2[0] == undefined) {
+                    return res.redirect(308, "/404");
                 } else {
                     var baslik = result2[0].baslik;
                     var text = result2[0].text;
-                    if (text == "Sayfa Bulunamadı") {
-                        text = "Text bulunamadı ama nedenini söylemem :)";
-                    }
                     res.send(text);
                 }
             }

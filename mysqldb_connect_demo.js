@@ -4,7 +4,7 @@ var db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "test",
+    database: "note-chan",
 });
 
 db.connect(function (err) {
@@ -12,16 +12,16 @@ db.connect(function (err) {
     console.log("Connected!");
 });
 
-var table = "test";
-/*
-//*CREATE 
+var table = "notechan";
+
+//*CREATE
 db.query(
-    `CREATE TABLE ${table} (id VARCHAR(255) ,üyedurum VARCHAR(255), puan VARCHAR(255))`,
+    `CREATE TABLE notechan (id VARCHAR(255) ,baslik VARCHAR(255), text VARCHAR(255))`,
     function (err, result) {
         if (err) throw err;
         console.log("Table created");
     }
-); 
+); /*
 //*Insert 
 db.query(
     `INSERT INTO ${table} (id, üyedurum, puan) VALUES ('2', 'VIP Üye', '972')`,

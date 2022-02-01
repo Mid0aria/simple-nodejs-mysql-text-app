@@ -8,18 +8,18 @@ const randomid = require("randomid");
 
 const mysql = require("mysql");
 var db = mysql.createConnection({
-    host: "yourmysqlhost",
-    user: "username",
-    password: "pass",
-    database: "mysqldbname",
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "note-chan",
 });
 db.connect(function (err) {
     if (err) throw err;
     console.log("DB Connected!");
 });
 
-var appname = "Simple Text App";
-var dbtablename = "test";
+var appname = "Note Chan";
+var dbtablename = "notechan";
 
 require("./utils/express")(
     express,
