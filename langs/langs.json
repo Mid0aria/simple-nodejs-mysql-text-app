@@ -1,0 +1,20 @@
+{
+        "tr":{
+        "success":"Başarılı",
+        "fail":"Başarısız",
+        "opened":"Açıldı",
+        "closed":"Kapandı",
+        "dbconnect": "Database Bağlandı",
+        "portstatus":"Port Durumu",
+        "portnumber":"Port Numarası"
+        },
+        "en":{
+        "success":"Success",
+        "fail":"Fail",
+        "opened":"Opened",
+        "closed":"Closed",
+        "dbconnect": "Database Connected",
+        "portstatus":"Port Status",
+        "portnumber":"Port Number"
+        }
+}

@@ -18,7 +18,7 @@ module.exports = (
 
     app.get("/", (req, res) => {
         res.render("../Frontend/index.ejs", {
-            frontendappname: appname,
+            appname: appname,
         });
     });
 
@@ -71,6 +71,7 @@ module.exports = (
                     var baslik = result2[0].baslik;
                     var text = result2[0].text;
                     res.render("../Frontend/paste.ejs", {
+                        appname: appname,
                         baslik: baslik,
                         text: text,
                         id: id,
